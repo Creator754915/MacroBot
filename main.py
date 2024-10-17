@@ -85,4 +85,17 @@ test.shortcut("copy")
 test.slideFromTo((100, 100), (500, 854))
 test.writeThis("This is a macro !")
 test.detectImage()
-test.saveTimeline("savefile")
+test.saveTimeline("saveMacro")
+
+with open("saveMacro.json", "r") as f:
+    data = json.load(f)
+
+for i in range(1, len(data)):
+    if str(i) in data and "moveTo" in data[str(i)]:
+        print(data[str(i)]["moveTo"]["x"], data[str(i)]["moveTo"]["y"])
+        pt.moveTo(data[str(i)]["moveTo"]["x"], data[str(i)]["moveTo"]["y"])
+    elif str(i) in data and "moveTo" in data[str(i)]:
+        print(data[str(i)]["moveTo"]["x"], data[str(i)]["moveTo"]["y"])
+        pt.moveTo(data[str(i)]["moveTo"]["x"], data[str(i)]["moveTo"]["y"])
+    else:
+        print("none")
