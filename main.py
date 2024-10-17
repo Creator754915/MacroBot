@@ -1,7 +1,7 @@
 import pyautogui as pt
 import time as time
 import tkinter as tk
-import json as js
+import json
 
 timeline = {}
 
@@ -41,7 +41,7 @@ class AddAction:
             return e
 
     def slideFromTo(self, pos1: tuple, pos2: tuple):
-        self.timeline[len(self.timeline) + 1] = {"slideFormTo": {pos1, pos2}}
+        self.timeline[len(self.timeline) + 1] = {"slideFormTo": [pos1, pos2]}
 
     def detectImage(self):
         path = str(input("Enter the path of the image => "))
@@ -74,15 +74,15 @@ class AddAction:
 
     def saveTimeline(self, filename: str):
         with open(f"{filename}.json", 'w') as f:
-            js.dump(self.timeline, f, indent=2)
+            json.dump(self.timeline, f, indent=2)
 
 
 test = AddAction()
 test.moveTo(0, 0)
 test.getMousePosition()
 test.waitSince(2)
-test.shortcut("rere")
+test.shortcut("copy")
 test.slideFromTo((100, 100), (500, 854))
-test.writeThis("fghjfdgfsdgdfgfdgfdgfdgfsd")
+test.writeThis("This is a macro !")
 test.detectImage()
 test.saveTimeline("savefile")
